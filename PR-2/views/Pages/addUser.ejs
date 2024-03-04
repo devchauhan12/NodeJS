@@ -1,0 +1,159 @@
+<%- include('../Partial/Header') %>
+    <div class="d-flex align-items-center justify-content-center vh-80">
+        <div class="col-5">
+            <form action="/addplayer" method="post" class="border p-3  rounded bg-white shadow"
+                onsubmit="return validateForm(this)">
+                <h3 class="text-secondary text-center mb-3">Sports Tournament</h3>
+                <div class="d-flex gap-2">
+                    <div class="col-6">
+                        <div class="d-flex justify-content-between">
+                            <label for="" class="text-secondary">Name :</label>
+                            <p class="text-danger m-0" id="nameError"></p>
+                        </div>
+                        <input type="text" name="name" class="form-control" placeholder="Enter Name">
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex justify-content-between">
+                            <label for="" class="text-secondary">Email :</label>
+                            <p class="text-danger m-0" id="emailError"></p>
+                        </div>
+                        <input type="email" name="email" class="form-control" placeholder="Enter Email">
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2 mt-2">
+                    <div class="col-6">
+                        <div class="d-flex justify-content-between">
+                            <label for="" class="text-secondary">Password :</label>
+                            <p class="text-danger m-0" id="passError"></p>
+                        </div>
+                        <input type="password" name="password" class="form-control" placeholder="Enter Password">
+                    </div>
+                    <div class="col-6 text-center ms-5">
+                        <div class="d-flex justify-content-between">
+                            <label for="" class="text-secondary">Gender : </label>
+                            <p class="text-danger m-0 me-5" id="genError"></p>
+                        </div>
+                        <div class="d-flex ">
+                            <input type="radio" id="male" name="gender" value="Male" class="me-1">
+                            <label for="male" class="text-dark me-3">Male</label>
+
+                            <input type="radio" id="female" name="gender" value="Female" class="me-1">
+                            <label for="female" class="text-dark">Female</label>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mt-3">
+                    <label for="" class="text-secondary">Select Games : </label>
+                    <p class="text-danger ms-5 mb-0" id="gameError"></p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between text-dark gap-2">
+                    <div class="col-2">
+                        <input type="checkbox" name="games" value="Cricket"> Cricket<br>
+                        <input type="checkbox" name="games" value="basketball"> Basketball<br>
+                    </div>
+                    <div class="col-2">
+                        <input type="checkbox" name="games" value="Football"> Football<br>
+                        <input type="checkbox" name="games" value="Tennis"> Tennis<br>
+                    </div>
+                    <div class="col-2">
+                        <input type="checkbox" name="games" value="Volleyball"> Volleyball<br>
+                        <input type="checkbox" name="games" value="Badminton"> Badminton<br>
+                    </div>
+                    <div class="col-6 text-center">
+                        <div class="col-8 m-auto">
+                            <div class="d-flex">
+                                <label for="dropdown" class="text-secondary me-3">Branch :</label>
+                                <p class="text-danger m-0 ms-5" id="branchError"></p>
+                            </div>
+                            <select id="dropdown" class="form-control" name="branch">
+                                <option value="--Select Branch--" selected>--Select Branch--</option>
+                                <option value="RnW-1">RnW-1</option>
+                                <option value="RnW-2">RnW-2</option>
+                                <option value="RnW-3">RnW-3</option>
+                                <option value="RnW-4">RnW-4</option>
+                                <option value="RnW-5">RnW-5</option>
+                                <option value="RnW-6">RnW-6</option>
+                                <option value="RnW-7">RnW-7</option>
+                                <option value="RnW-8">RnW-8</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex  align-items-center justify-content-between mt-2">
+                    <label for="textarea" class="text-secondary">Address :</label>
+                    <p class="text-danger m-0" id="addError"></p>
+                </div>
+                <textarea id="textarea" class="form-control" rows="1" placeholder="Enter Address"
+                    name="address"></textarea>
+                <div class="text-center">
+                    <button class="btn btn-outline-dark mt-2 text-center">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <%- include('../Partial/Footer') %>
+        <script>
+            const validateForm = (e) => {
+                let isValid = true;
+                const nameError = document.getElementById("nameError");
+                const emailError = document.getElementById("emailError");
+                const passError = document.getElementById("passError");
+                const genError = document.getElementById("genError");
+                const gameError = document.getElementById("gameError");
+                const branchError = document.getElementById("branchError");
+                const addError = document.getElementById("addError");
+
+                if (e.name.value === "") {
+                    nameError.innerText = "Name Required*";
+                    isValid = false;
+                } else {
+                    nameError.innerText = ""
+                }
+
+                if (e.email.value === "") {
+                    emailError.innerText = "Email Required*";
+                    isValid = false;
+                } else {
+                    emailError.innerText = ""
+                }
+
+                if (e.password.value === "") {
+                    passError.innerText = "Password Required*";
+                    isValid = false;
+                } else {
+                    passError.innerText = ""
+                }
+
+                if (e.gender.value === "") {
+                    genError.innerText = "Select Gender*";
+                    isValid = false;
+                } else {
+                    genError.innerText = ""
+                }
+
+                const isAnyGameSelected = Array.from(e.querySelectorAll('input[name="games"]')).some(checkbox => checkbox.checked);
+                if (!isAnyGameSelected) {
+                    gameError.innerText = "Select at least one game*";
+                    isValid = false;
+                } else {
+                    gameError.innerText = "";
+                }
+
+                if (e.branch.value === "" || e.branch.value === "--Select Branch--") {
+                    branchError.innerText = "Select Branch*";
+                    isValid = false;
+                } else {
+                    branchError.innerText = ""
+                }
+
+                if (e.address.value === "") {
+                    addError.innerText = "Address Required*";
+                    isValid = false;
+                } else {
+                    addError.innerText = ""
+                }
+
+                return isValid
+            }
+        </script>
