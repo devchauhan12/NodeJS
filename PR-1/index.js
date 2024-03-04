@@ -8,7 +8,7 @@ http.createServer((req, res) => {
         res.end('Home Page')
     } else if (req.url == '/about') {
         fs.readFile('about.txt', 'utf-8', (err, data) => {
-            console.log(req.url)
+            console.log(req.url , data)
             // console.log(data)
             res.end(data);
         });
