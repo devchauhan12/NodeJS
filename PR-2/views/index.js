@@ -4,9 +4,7 @@ app.set('view engine', 'ejs')
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 const employees = []
-
 
 app.get('/', (req, res) => {
     res.render('../Pages/home')
@@ -23,7 +21,6 @@ app.get('/addUser', (req, res) => {
 app.post('/addemployee', (req, res) => {
     employees.push(req.body);
     res.redirect('/list');
-    // console.log(req.body);
 })
 
 app.get('/deleteemployee/:id', (req, res) => {
