@@ -3,7 +3,7 @@
         <div class="col-5">
             <form action="/addemployee" method="post" class="border p-3  rounded bg-white shadow"
                 onsubmit="return validateForm(this)">
-                <h3 class="text-secondary text-center mb-3">Employee</h3>
+                <h3 class="text-secondary text-center mb-3">Employee Details</h3>
                 <div class="d-flex gap-2">
                     <div class="col-6">
                         <div class="d-flex justify-content-between">
@@ -23,10 +23,10 @@
                 <div class="d-flex align-items-center gap-2 mt-2">
                     <div class="col-6">
                         <div class="d-flex justify-content-between">
-                            <label for="" class="text-secondary">Password :</label>
-                            <p class="text-danger m-0" id="passError"></p>
+                            <label for="" class="text-secondary">Employee ID :</label>
+                            <p class="text-danger m-0" id="idError"></p>
                         </div>
-                        <input type="password" name="password" class="form-control" placeholder="Enter Password">
+                        <input type="number" name="id" class="form-control" placeholder="Enter Employee ID">
                     </div>
                     <div class="col-6 text-center ms-5">
                         <div class="d-flex justify-content-between">
@@ -45,16 +45,16 @@
                 </div>
                 <div class="d-flex align-items-center mt-3">
                     <label for="" class="text-secondary">Select Skills : </label>
-                    <p class="text-danger ms-5 mb-0" id="gameError"></p>
+                    <p class="text-danger ms-5 mb-0" id="skillError"></p>
                 </div>
                 <div class="d-flex align-items-center justify-content-between text-dark gap-2">
                     <div class="col-2">
-                        <input type="checkbox" name="Skills" value=""> <br>
-                        <input type="checkbox" name="Skills" value="basketball"> Basketball<br>
+                        <input type="checkbox" name="skills" value="JS"> JavaScript<br>
+                        <input type="checkbox" name="skills" value="React"> React<br>
                     </div>
                     <div class="col-2">
-                        <input type="checkbox" name="Skills" value="Football"> Football<br>
-                        <input type="checkbox" name="Skills" value="Tennis"> Tennis<br>
+                        <input type="checkbox" name="skills" value="NextJS"> NextJS<br>
+                        <input type="checkbox" name="skills" value="NodeJS"> NodeJS<br>
                     </div>
                     <div class="col-6 text-center">
                         <div class="col-8 m-auto">
@@ -89,9 +89,9 @@
                 let isValid = true;
                 const nameError = document.getElementById("nameError");
                 const emailError = document.getElementById("emailError");
-                const passError = document.getElementById("passError");
+                const idError = document.getElementById("idError");
                 const genError = document.getElementById("genError");
-                const gameError = document.getElementById("gameError");
+                const skillError = document.getElementById("skillError");
                 const branchError = document.getElementById("branchError");
                 const addError = document.getElementById("addError");
 
@@ -109,11 +109,11 @@
                     emailError.innerText = ""
                 }
 
-                if (e.password.value === "") {
-                    passError.innerText = "Password Required*";
+                if (e.id.value === "") {
+                    idError.innerText = "Employee ID Required*";
                     isValid = false;
                 } else {
-                    passError.innerText = ""
+                    idError.innerText = ""
                 }
 
                 if (e.gender.value === "") {
@@ -123,12 +123,12 @@
                     genError.innerText = ""
                 }
 
-                const isAnyGameSelected = Array.from(e.querySelectorAll('input[name="games"]')).some(checkbox => checkbox.checked);
+                const isAnyGameSelected = Array.from(e.querySelectorAll('input[name="skills"]')).some(checkbox => checkbox.checked);
                 if (!isAnyGameSelected) {
-                    gameError.innerText = "Select at least one game*";
+                    skillError.innerText = "Select at least one Skill*";
                     isValid = false;
                 } else {
-                    gameError.innerText = "";
+                    skillError.innerText = "";
                 }
 
                 if (e.branch.value === "" || e.branch.value === "--Select Branch--") {
