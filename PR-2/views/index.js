@@ -5,49 +5,45 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-const players = [
-    { name: "Kashyap", email: "kashyap@gmail.com", password: "465", gender: "Male", games: "Cricket", branch: "RnW-1", address: "Ahmedabad" },
-    { name: "Vikas", email: "Vikas@gmail.com", password: "798", gender: "Male", games: "Cricket, Badminton", branch: "RnW-5", address: "Surat" },
-    { name: "Om", email: "Om@gmail.com", password: "132", gender: "Male", games: "Football", branch: "RnW-6", address: "Jodhpur" },
-]
+const employees = []
 
 
 app.get('/', (req, res) => {
-    res.render('./Pages/home')
+    res.render('../Pages/home')
 })
 
 app.get('/list', (req, res) => {
-    res.render('./Pages/index', { players: players })
+    res.render('../Pages/index', { employees: employees })
 })
 
 app.get('/addUser', (req, res) => {
-    res.render('./Pages/addUser')
+    res.render('../Pages/addUser')
 })
 
-app.post('/addplayer', (req, res) => {
-    players.push(req.body);
+app.post('/addemployee', (req, res) => {
+    employees.push(req.body);
     res.redirect('/list');
     // console.log(req.body);
 })
 
-app.get('/deletePlayer/:id', (req, res) => {
+app.get('/deleteemployee/:id', (req, res) => {
     var id = req.params.id
-    players.splice(id, 1)
+    employees.splice(id, 1)
     res.redirect('/list')
 })
 
-app.get('/editPlayer/:id', (req, res) => {
+app.get('/editemployee/:id', (req, res) => {
     var id = req.params.id
-    var update = players[id]
-    res.render('./Pages/editForm', { player: update })
+    var update = employees[id]
+    res.render('../Pages/editForm', { employee: update })
 })
 
-app.post('/editPlayer/:id', (req, res) => {
+app.post('/editemployee/:id', (req, res) => {
     var id = req.params.id
-    players[id] = req.body
+    employees[id] = req.body
     res.redirect('/list')
 })
 
-app.listen(8000, () => {
+app.listen(3000, () => {
     console.log('Server Start');
 })
