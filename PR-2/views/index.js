@@ -7,15 +7,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const employees = []
 
 app.get('/', (req, res) => {
-    res.render('../Pages/home')
+    res.render('./Pages/home')
 })
 
 app.get('/list', (req, res) => {
-    res.render('../Pages/index', { employees: employees })
+    res.render('./Pages/index', { employees: employees })
 })
 
 app.get('/addUser', (req, res) => {
-    res.render('../Pages/addUser')
+    res.render('./Pages/addUser')
 })
 
 app.post('/addemployee', (req, res) => {
@@ -32,7 +32,7 @@ app.get('/deleteemployee/:id', (req, res) => {
 app.get('/editemployee/:id', (req, res) => {
     var id = req.params.id
     var update = employees[id]
-    res.render('../Pages/editForm', { employee: update })
+    res.render('./Pages/editForm', { employee: update })
 })
 
 app.post('/editemployee/:id', (req, res) => {
